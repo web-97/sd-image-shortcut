@@ -1,6 +1,14 @@
 document.addEventListener('DOMContentLoaded', function() {
     onUiLoaded(initUi);
 });
+
+const triggerEvent = (el, event) => {
+    if (! el) {
+        return;
+    }
+    el.dispatchEvent(new Event(event.trim()));
+    return el;
+}
 const renderBut = ()=>{
     const buts = localStorage.getItem('user_save_size')?.split(',')??[]
     const [shortcutButsTxt,shortcutButsImg] = document.getElementsByClassName('shortcut-buts')
@@ -28,9 +36,12 @@ const renderBut = ()=>{
             cur.onclick = ()=>{
                 for (const input of txt2img_width.getElementsByTagName("input")) {
                     input.value = width;
+                    triggerEvent(input, 'change');
                 }
                 for (const input of txt2img_height.getElementsByTagName("input")) {
                     input.value = height;
+                    triggerEvent(input, 'change');
+
                 }
             }
             cur.style.display = 'inline-flex'
@@ -41,9 +52,13 @@ const renderBut = ()=>{
             cur1.onclick = ()=>{
                 for (const input of img2img_width.getElementsByTagName("input")) {
                     input.value = width;
+                    triggerEvent(input, 'change');
+
                 }
                 for (const input of img2img_height.getElementsByTagName("input")) {
                     input.value = height;
+                    triggerEvent(input, 'change');
+
                 }
             }
             cur1.style.display = 'inline-flex'
@@ -116,9 +131,11 @@ const autoReadImageSize = ()=>{
                 const res = calculateImageSize(imgWidth,imgHeight,(512*512))
                 for (const input of img2img_width.getElementsByTagName("input")) {
                     input.value = res.width
+                    triggerEvent(input, 'change');
                 }
                 for (const input of img2img_height.getElementsByTagName("input")) {
                     input.value = res.height
+                    triggerEvent(input, 'change');
                 }
             }
         }
