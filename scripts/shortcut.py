@@ -16,7 +16,7 @@ class ExtensionTemplateScript(scripts.Script):
         return scripts.AlwaysVisible
 
     def ui(self, is_img2img):
-        with gr.Accordion('Shortcut', open=False,elem_classes='shortcut-active'):
+        with gr.Accordion('Shortcut', open=True,elem_classes='shortcut-active'):
             with gr.Blocks():
                 with gr.Row(elem_classes='shortcut-buts'):
                     gr.Button(value="Auto",visible=is_img2img, variant='secondary', elem_classes="shortcut-auto").style(size="sm").click(None,_js="autoReadImageSize")
